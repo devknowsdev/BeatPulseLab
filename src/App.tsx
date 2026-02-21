@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import type { TemplateState, RecordingEntry } from './types';
 import { useAnnotationState } from './hooks/useAnnotationState';
 import { useTimer } from './hooks/useTimer';
-import { ApiKeyGate } from './components/ApiKeyGate';
+import SetupScreen from './components/SetupScreen';
 import { PhaseSelect } from './components/PhaseSelect';
 import { PhaseReady } from './components/PhaseReady';
 import { PhaseListening } from './components/PhaseListening';
@@ -243,7 +243,7 @@ function App() {
   }
 
   if (!apiKeyDone) {
-    return <ApiKeyGate onDone={handleApiKeyDone} />;
+    return <SetupScreen onEnter={handleApiKeyDone} />;
   }
 
   const { phase, activeTrackId, annotations } = state;
@@ -251,32 +251,50 @@ function App() {
 
   return (
     <div className="app-root">
-      {/* Help button — hidden when modal is open so it doesn't overlap close btn */}
+      {/* Help + Setup buttons */}
       {!showHelp && (
-        <button
-          onClick={() => setShowHelp(true)}
-          aria-label="Help"
-          style={{
-            position: 'fixed',
-            top: '0.75rem',
-            right: '0.75rem',
-            zIndex: 100,
-            background: 'transparent',
-            border: '1px solid var(--border-active)',
-            borderRadius: '50%',
-            color: 'var(--text-muted)',
-            fontFamily: 'var(--font-mono)',
-            fontSize: '0.875rem',
-            width: '32px',
-            height: '32px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-          }}
-        >
-          ?
-        </button>
+        <div style={{ position: 'fixed', top: '0.75rem', right: '0.75rem', zIndex: 100, display: 'flex', gap: '0.5rem' }}>
+          <button
+            onClick={() => setApiKeyDone(false)}
+            aria-label="Setup"
+            style={{
+              background: 'transparent',
+              border: '1px solid var(--border-active)',
+              borderRadius: 'var(--radius)',
+              color: 'var(--text-muted)',
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.6875rem',
+              letterSpacing: '0.05em',
+              padding: '0 0.625rem',
+              height: '32px',
+              display: 'flex',
+              alignItems: 'center',
+              cursor: 'pointer',
+            }}
+          >
+            SETUP
+          </button>
+          <button
+            onClick={() => setShowHelp(true)}
+            aria-label="Help"
+            style={{
+              background: 'transparent',
+              border: '1px solid var(--border-active)',
+              borderRadius: '50%',
+              color: 'var(--text-muted)',
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.875rem',
+              width: '32px',
+              height: '32px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+            }}
+          >
+            ?
+          </button>
+        </div>
       )}
 
       {/* Help modal */}
