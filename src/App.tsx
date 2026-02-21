@@ -253,7 +253,18 @@ function App() {
     <div className="app-root">
       {/* Help + Setup buttons */}
       {!showHelp && (
-        <div style={{ position: 'fixed', top: '0.75rem', right: '0.75rem', zIndex: 100, display: 'flex', gap: '0.5rem' }}>
+        <div style={{ position: 'fixed', top: '0.75rem', right: '0.75rem', zIndex: 100, display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+          {activeAnnotation && (
+            <span style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.75rem',
+              color: timer.isRunning ? 'var(--amber)' : 'var(--text-dim)',
+              letterSpacing: '0.05em',
+              padding: '0 0.5rem',
+            }}>
+              ⏱ {Math.floor(timer.elapsedSeconds / 60)}:{String(timer.elapsedSeconds % 60).padStart(2, '0')}
+            </span>
+          )}
           <button
             onClick={() => setApiKeyDone(false)}
             aria-label="Setup"

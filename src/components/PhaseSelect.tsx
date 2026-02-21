@@ -121,6 +121,11 @@ export function PhaseSelect({
                   }}
                 >
                   {timeline.length} sections · {globalFilled}/9 categories
+                  {(ann?.elapsedSeconds ?? 0) > 0 && (
+                    <span style={{ marginLeft: '0.75rem', color: 'var(--amber)' }}>
+                      · ⏱ {Math.floor((ann?.elapsedSeconds ?? 0) / 60)}:{String((ann?.elapsedSeconds ?? 0) % 60).padStart(2, '0')}
+                    </span>
+                  )}
                 </p>
               )}
             </button>
