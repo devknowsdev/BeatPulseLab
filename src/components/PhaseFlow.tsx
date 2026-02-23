@@ -2,7 +2,9 @@ import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import type { TrackAnnotation, Phase, TimelineEntry } from '../types';
 import { TAG_SUGGESTIONS, SECTION_TYPE_SHORTCUTS } from '../lib/schema';
 import { useMicMeter } from '../hooks';
+import { useKeyboardShortcuts } from '../hooks/useKeyboardShortcuts';
 import { WaveformScrubber } from './WaveformScrubber';
+import { SpotifyPlayer } from './SpotifyPlayer';
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -246,24 +248,19 @@ export function PhaseFlow({
     [timeline]
   );
 
-  // ── Spotify sync helpers ────────────────────────────────────────────────
-  function spotifyPlay() {
-    if (spotifyPlayer?.isReady) spotifyPlayer.play().catch(() => {});
-  }
-  function spotifyPause() {
-    if (spotifyPlayer?.isReady) spotifyPlayer.pause().catch(() => {});
-  }
+  // ── Timer + Spotify sync helpers ────────────────────────────────────────
+  // NOTE: timerStart / timerPause (from App.tsx) already call spotifyPlayer.play/pause
+  // via the spotifyPlayerRef. Do NOT call Spotify here to avoid double-firing.
+
   function spotifySeekMs(ms: number) {
     if (spotifyPlayer?.isReady) spotifyPlayer.seek(Math.max(0, ms)).catch(() => {});
   }
 
   function handlePlayPause() {
     if (isTimerRunning) {
-      timerPause();
-      spotifyPause();
+      timerPause();   // → also calls spotifyPlayer.pause() via App.tsx ref
     } else {
-      timerStart();
-      spotifyPlay();
+      timerStart();   // → also calls spotifyPlayer.play() via App.tsx ref
     }
   }
 
@@ -271,11 +268,23 @@ export function PhaseFlow({
     const next = Math.max(0, elapsedSeconds + deltaSecs);
     timerSeek(next);
     if (isTimerRunning) timerStart();
+    // Seek Spotify independently — App.tsx doesn't intercept seek
     spotifySeekMs(next * 1000);
   }
 
   // ── Progress bar ───────────────────────────────────────────────────────
-  const durationSeconds = (annotation.track as any).durationSeconds ?? 300;
+  const spotifyDuration = spotifyPlayer?.duration ? spotifyPlayer.duration / 1000 : 0;
+  const durationSeconds = spotifyDuration > 0
+    ? spotifyDuration
+    : ((annotation.track as any).durationSeconds ?? 300);
+  const spotifyPositionSeconds = spotifyPlayer?.position
+    ? spotifyPlayer.position / 1000
+    : elapsedSeconds;
+
+  useKeyboardShortcuts([
+    { key: ' ', handler: handlePlayPause },
+  ]);
+
   const progressFraction = Math.min(1, elapsedSeconds / durationSeconds);
 
   // ── Elapsed seconds ref for use inside recognition callback ───────────
@@ -361,9 +370,9 @@ export function PhaseFlow({
       {/* ── WAVEFORM SCRUBBER ── */}
       <div style={{ background: 'var(--surface)', borderBottom: '1px solid var(--border)', flexShrink: 0 }}>
         <WaveformScrubber
-          spotifyTrackId={annotation.track.spotifyId}
+          spotifyTrackId={annotation.track.spotifyId ?? spotifyPlayer?.currentTrackId ?? null}
           spotifyToken={spotifyToken}
-          elapsedSeconds={elapsedSeconds}
+          elapsedSeconds={spotifyPositionSeconds}
           durationSeconds={durationSeconds}
           onSeek={(secs) => {
             timerSeek(secs);
@@ -375,6 +384,17 @@ export function PhaseFlow({
 
       {/* ── SCROLLABLE BODY ── */}
       <div style={{ flex: 1, overflowY: 'auto', padding: '1rem' }}>
+
+        {/* ── SPOTIFY PLAYER ── */}
+        {spotifyToken && spotifyPlayer?.isReady && (
+          <div style={{ marginBottom: '1.25rem' }}>
+            <SpotifyPlayer
+              player={spotifyPlayer}
+              spotifyId={annotation.track.spotifyId ?? null}
+              compact={false}
+            />
+          </div>
+        )}
 
         {/* ── TRANSPORT ROW ── */}
         <div style={{

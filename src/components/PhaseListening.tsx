@@ -493,24 +493,15 @@ export function PhaseListening({
   const isWarning = elapsedSeconds >= 20 * 60;
   const timerColor = !isTimerRunning ? 'var(--text-muted)' : isWarning ? 'var(--error)' : 'var(--amber)';
 
-  // ── Spotify sync helpers ───────────────────────────────────────────────────
-  function spotifyPlay() {
-    if (spotifyPlayer?.isReady) spotifyPlayer.play().catch(() => {});
-  }
-  function spotifyPause() {
-    if (spotifyPlayer?.isReady) spotifyPlayer.pause().catch(() => {});
-  }
-  function spotifySeek(seconds: number) {
-    if (spotifyPlayer?.isReady) spotifyPlayer.seek(Math.max(0, seconds) * 1000).catch(() => {});
-  }
+  // ── Timer + Spotify sync helpers ──────────────────────────────────────────
+  // NOTE: timerStart / timerPause (from App.tsx) already call spotifyPlayer.play/pause
+  // via the spotifyPlayerRef. Do NOT call Spotify here to avoid double-firing.
 
   function toggleTimer() {
     if (isTimerRunning) {
-      timerPause();
-      spotifyPause();
+      timerPause();   // → also calls spotifyPlayer.pause() via App.tsx ref
     } else {
-      timerStart();
-      spotifyPlay();
+      timerStart();   // → also calls spotifyPlayer.play() via App.tsx ref
     }
   }
 
@@ -518,7 +509,8 @@ export function PhaseListening({
     const next = Math.max(0, elapsedSeconds + deltaSecs);
     timerSeek(next);
     if (isTimerRunning) timerStart();
-    spotifySeek(next);
+    // Seek Spotify independently — App.tsx doesn't intercept seek
+    if (spotifyPlayer?.isReady) spotifyPlayer.seek(Math.max(0, next) * 1000).catch(() => {});
   }
 
   const displayEntries = [...timeline].reverse();
@@ -614,8 +606,8 @@ export function PhaseListening({
           <WaveformScrubber
             spotifyTrackId={track.spotifyId}
             spotifyToken={spotifyToken}
-            elapsedSeconds={elapsedSeconds}
-            durationSeconds={(annotation.track as any).durationSeconds ?? 300}
+            elapsedSeconds={spotifyPlayer?.position ? spotifyPlayer.position / 1000 : elapsedSeconds}
+            durationSeconds={spotifyPlayer?.duration && spotifyPlayer.duration > 0 ? spotifyPlayer.duration / 1000 : ((annotation.track as any).durationSeconds ?? 300)}
             onSeek={(secs) => {
               timerSeek(secs);
               if (isTimerRunning) timerStart();

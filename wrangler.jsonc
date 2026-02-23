@@ -1,5 +1,5 @@
 {
-  "name": "beatpulse-annotator",
+  "name": "tunetag-annotator",
   "compatibility_date": "2026-02-21",
   "assets": {
     "directory": "./dist"

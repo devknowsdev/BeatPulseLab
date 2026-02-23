@@ -1,7 +1,7 @@
-# BeatPulse — Architecture Reference
+# TuneTag — Architecture Reference
 
 ## Overview
-BeatPulse is a single-page React application for annotating music tracks.
+TuneTag is a single-page React application for annotating music tracks.
 It runs entirely in the browser. There is no backend, no database, no server.
 Data persists in localStorage. Exports are generated client-side using ExcelJS.
 
@@ -17,7 +17,7 @@ Data persists in localStorage. Exports are generated client-side using ExcelJS.
 
 ## Directory Structure
 ```
-beatpulse-annotator/
+tunetag-annotator/
 ├── public/
 │   └── template.xlsx              # Excel template — track data is stamped into this
 ├── scripts/

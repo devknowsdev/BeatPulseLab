@@ -1,4 +1,4 @@
 #!/bin/bash
-echo "Starting BeatPulse..."
+echo "Starting TuneTag..."
 cd "$(dirname "$0")"
 npm run dev

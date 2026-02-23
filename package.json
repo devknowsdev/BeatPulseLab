@@ -1,5 +1,5 @@
 {
-  "name": "beatpulse-annotator",
+  "name": "tunetag-annotator",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "start:local": "vite --open"
+    "start:local": "vite --open",
+    "deploy": "npm run build && npx wrangler deploy"
   },
   "dependencies": {
     "exceljs": "^4.4.0",

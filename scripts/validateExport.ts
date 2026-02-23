@@ -1,5 +1,5 @@
 /**
- * BeatPulse Export Validation Script
+ * TuneTag Export Validation Script
  * Run: npx tsx scripts/validateExport.ts
  * Must exit with code 0 before submission.
  */
@@ -280,7 +280,7 @@ async function run() {
   const exportedBuffer = await exportAnnotationsToExcel(originalBuffer, fakeAnnotations);
 
   // Write for inspection
-  const outputPath = '/tmp/beatpulse_test_export.xlsx';
+  const outputPath = '/tmp/tunetag_test_export.xlsx';
   fs.writeFileSync(outputPath, exportedBuffer);
   console.log(`\nExported to: ${outputPath}\n`);
 

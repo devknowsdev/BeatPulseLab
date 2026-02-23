@@ -72,7 +72,7 @@ export function useSpotifyPlayer(token: string | null): UseSpotifyPlayerReturn {
         .catch((): void => {
           // Player disconnected or errored — do not crash the interval
         });
-    }, 1000);
+      }, 250);
   }, [stopPolling]);
 
   // ── createPlayer ───────────────────────────────────────────────────────────

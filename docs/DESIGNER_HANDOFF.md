@@ -1,7 +1,7 @@
-# BeatPulse — Designer Handoff
+# TuneTag — Designer Handoff
 
 ## Product context
-BeatPulse is a focused annotation tool for music industry professionals.
+TuneTag is a focused annotation tool for music industry professionals.
 The user listens to tracks, logs section boundaries with timestamps, writes analysis,
 and exports everything to a structured Excel workbook.
 
@@ -81,7 +81,7 @@ uppercase, `--text-dim` colour. Used for section headers and field labels throug
 **Purpose:** Choose which track to work on.
 
 **Layout:**
-- Header: "BEATPULSE LABS" label + "Annotation Session" title (Playfair Display)
+- Header: "TUNETAG" label + "Annotation Session" title (Playfair Display)
 - Track cards: vertical list, full width. One card per track.
 - Each card: Track number (amber label), track name (Playfair italic, 1.25rem),
   artist (muted, 0.875rem), status badge (top-right), progress summary (if in progress).

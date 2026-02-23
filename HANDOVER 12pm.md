@@ -1,15 +1,15 @@
-# BeatPulse Annotator — Project Handover Doc
+# TuneTag Annotator — Project Handover Doc
 *Last updated: 21 February 2026 — Session 2*
 
 ---
 
 ## Project Overview
 
-**App:** BeatPulse Annotator
+**App:** TuneTag Annotator
 **Purpose:** Real-time audio annotation tool for music supervisors and sound editors. Annotate Spotify tracks with timestamped notes, record voice memos, export to Excel.
 **Stack:** React + TypeScript + Vite
 **Repo:** GitHub (main branch, always up to date)
-**Live URL:** https://beatpulselab.devknowsdev.workers.dev/
+**Live URL:** https://tunetag.devknowsdev.workers.dev/
 **Hosting:** Cloudflare Pages (via Wrangler)
 **Local dev:** `npm run dev` → http://localhost:5173 (use localhost NOT 127.0.0.1 — Web Speech API requires it)
 
@@ -18,8 +18,8 @@
 ## Key File Paths
 
 ```
-/Users/duif/DK APP DEV/BeatPulseLab/beatpulse-annotator          ← live project
-/Users/duif/DK APP DEV/BeatPulseLab/beatpulse-annotator BACKUP.zip ← original backup
+/Users/duif/DK APP DEV/TuneTag/tunetag-annotator          ← live project
+/Users/duif/DK APP DEV/TuneTag/tunetag-annotator BACKUP.zip ← original backup
 ```
 
 ### Source structure
@@ -136,7 +136,7 @@ Replaced `ApiKeyGate.tsx` with a full onboarding screen at `src/components/Setup
 ## Spotify Developer Setup
 
 **Dashboard:** https://developer.spotify.com/dashboard
-**App:** BeatPulse (existing — do NOT delete, 24hr creation limit in effect until ~9pm tonight)
+**App:** TuneTag (existing — do NOT delete, 24hr creation limit in effect until ~9pm tonight)
 
 **APIs to enable:**
 - ✅ Web API
@@ -147,7 +147,7 @@ Replaced `ApiKeyGate.tsx` with a full onboarding screen at `src/components/Setup
 
 **Redirect URIs to add:**
 ```
-https://beatpulselab.devknowsdev.workers.dev/callback
+https://tunetag.devknowsdev.workers.dev/callback
 http://localhost:5173/callback
 ```
 
@@ -159,13 +159,13 @@ http://localhost:5173/callback
 
 ## Cloudflare Deployment
 
-**Live URL:** https://beatpulselab.devknowsdev.workers.dev/
+**Live URL:** https://tunetag.devknowsdev.workers.dev/
 **Config:** `wrangler.jsonc` in project root
 **Deploy:** automatic on push to `main`
 
 ```json
 {
-  "name": "beatpulse-annotator",
+  "name": "tunetag-annotator",
   "compatibility_date": "2026-02-21",
   "assets": {
     "directory": "./dist"
@@ -233,7 +233,7 @@ A stripped-back annotation mode for uninterrupted listening. Designed for music 
 
 ```bash
 # Navigate to project
-cd "/Users/duif/DK APP DEV/BeatPulseLab/beatpulse-annotator"
+cd "/Users/duif/DK APP DEV/TuneTag/tunetag-annotator"
 
 # Run locally (always use localhost, not 127.0.0.1)
 npm run dev
@@ -268,7 +268,7 @@ du -sh src/* | sort -rh
 |-----|---------|
 | `spotify_api_key` | Spotify client token |
 | `openai_api_key` | OpenAI key for Whisper + text polish |
-| `beatpulse_api_key_gate_done` | Whether setup screen has been completed |
+| `tunetag_api_key_gate_done` | Whether setup screen has been completed |
 
 ---
 
@@ -295,4 +295,4 @@ du -sh src/* | sort -rh
 | GPT Plus | Parallel tasks, feasibility research |
 | GitHub | Source control, triggers Cloudflare deploy on push |
 | Cloudflare Pages | Hosting via Wrangler |
-| Spotify Developer | beatpulse app — Web API + Web Playback SDK only |
+| Spotify Developer | tunetag app — Web API + Web Playback SDK only |

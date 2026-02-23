@@ -1,4 +1,4 @@
-# BeatPulse Annotator — Claude Code Master Session Doc
+# TuneTag Annotator — Claude Code Master Session Doc
 *Updated: 21 February 2026 — Session 3*
 *Paste prompts ONE AT A TIME. Wait for TypeScript clean ✓ before moving to next.*
 
@@ -36,7 +36,7 @@ The following work is complete and committed. Claude Code should not touch these
 ## PENDING SMALL FIXES (do before Phase 1 prompts if not already done)
 
 ```
-For the project at /Users/duif/DK APP DEV/BeatPulseLab/beatpulse-annotator
+For the project at /Users/duif/DK APP DEV/TuneTag/tunetag-annotator
 
 1. In src/lib/spotifyAuth.ts, find the REDIRECT_URI constant and replace it with:
    const REDIRECT_URI = window.location.origin + '/callback'
@@ -56,7 +56,7 @@ For the project at /Users/duif/DK APP DEV/BeatPulseLab/beatpulse-annotator
 *Est. time: 5 min. Low risk — mostly imports and a placeholder.*
 
 ```
-For the project at /Users/duif/DK APP DEV/BeatPulseLab/beatpulse-annotator
+For the project at /Users/duif/DK APP DEV/TuneTag/tunetag-annotator
 
 1. In src/types/index.ts, add 'flow' to the Phase union type.
    (The union already has 'prompts_tags' from the last session — add 'flow' alongside it.)
@@ -121,7 +121,7 @@ For the project at /Users/duif/DK APP DEV/BeatPulseLab/beatpulse-annotator
 
 ```
 Replace the placeholder src/components/PhaseFlow.tsx for the project at
-/Users/duif/DK APP DEV/BeatPulseLab/beatpulse-annotator
+/Users/duif/DK APP DEV/TuneTag/tunetag-annotator
 
 PROPS (already wired from App.tsx):
   annotation: TrackAnnotation
@@ -230,7 +230,7 @@ Report line count of PhaseFlow.tsx.
 
 ```
 Improve the PhaseSelect.tsx layout for the project at
-/Users/duif/DK APP DEV/BeatPulseLab/beatpulse-annotator
+/Users/duif/DK APP DEV/TuneTag/tunetag-annotator
 
 IMPORTANT: The file already has a "PROMPTS & TAGS" button added in the last session.
 Do NOT remove it. Do not change any routing logic.
@@ -286,7 +286,7 @@ Run npx tsc --noEmit. Report TypeScript clean ✓
 
 ```
 Commit and push Phase 1 work for the project at
-/Users/duif/DK APP DEV/BeatPulseLab/beatpulse-annotator
+/Users/duif/DK APP DEV/TuneTag/tunetag-annotator
 
 1. git add .
 2. git commit -m "Add Flow Mode phase, improve PhaseSelect layout and track cards"
@@ -305,7 +305,7 @@ Commit and push Phase 1 work for the project at
 
 ```
 Add a Full Screen layout mode toggle to PhaseListening.tsx for the project at
-/Users/duif/DK APP DEV/BeatPulseLab/beatpulse-annotator
+/Users/duif/DK APP DEV/TuneTag/tunetag-annotator
 
 IMPORTANT: PhaseListening.tsx is large (~1254 lines). Make surgical changes only.
 Do NOT restructure, rename, or move any existing logic.
@@ -363,7 +363,7 @@ Do NOT restructure, rename, or move any existing logic.
 
 ```
 Commit and push Phase 2 for the project at
-/Users/duif/DK APP DEV/BeatPulseLab/beatpulse-annotator
+/Users/duif/DK APP DEV/TuneTag/tunetag-annotator
 
 1. git add .
 2. git commit -m "Add Full Screen layout toggle to PhaseListening"
@@ -383,7 +383,7 @@ Commit and push Phase 2 for the project at
 
 ```
 Clean up project housekeeping for the project at
-/Users/duif/DK APP DEV/BeatPulseLab/beatpulse-annotator
+/Users/duif/DK APP DEV/TuneTag/tunetag-annotator
 
 1. Add to .gitignore if not already present:
    .DS_Store
@@ -411,7 +411,7 @@ Clean up project housekeeping for the project at
 
 ```
 Refactor PhaseListening.tsx for the project at
-/Users/duif/DK APP DEV/BeatPulseLab/beatpulse-annotator
+/Users/duif/DK APP DEV/TuneTag/tunetag-annotator
 
 Extract the mic level meter logic into a dedicated hook.
 
@@ -437,7 +437,7 @@ Extract the mic level meter logic into a dedicated hook.
 
 ```
 Refactor PhaseListening.tsx for the project at
-/Users/duif/DK APP DEV/BeatPulseLab/beatpulse-annotator
+/Users/duif/DK APP DEV/TuneTag/tunetag-annotator
 
 Extract MediaRecorder and mic stream logic into a dedicated hook.
 
@@ -464,7 +464,7 @@ Extract MediaRecorder and mic stream logic into a dedicated hook.
 
 ```
 Refactor PhaseListening.tsx for the project at
-/Users/duif/DK APP DEV/BeatPulseLab/beatpulse-annotator
+/Users/duif/DK APP DEV/TuneTag/tunetag-annotator
 
 Extract SpeechRecognition logic into a dedicated hook.
 
@@ -489,7 +489,7 @@ Extract SpeechRecognition logic into a dedicated hook.
 
 ```
 Refactor PhaseListening.tsx for the project at
-/Users/duif/DK APP DEV/BeatPulseLab/beatpulse-annotator
+/Users/duif/DK APP DEV/TuneTag/tunetag-annotator
 
 Extract the recordings panel UI into a dedicated component.
 
@@ -525,7 +525,7 @@ Extract the recordings panel UI into a dedicated component.
 
 ```
 Final cleanup pass for the project at
-/Users/duif/DK APP DEV/BeatPulseLab/beatpulse-annotator
+/Users/duif/DK APP DEV/TuneTag/tunetag-annotator
 
 1. Check PhaseListening.tsx line count.
    If still over 300 lines, identify what remains that can be
@@ -555,7 +555,7 @@ Final cleanup pass for the project at
 
 ```
 Commit and push the full refactor for the project at
-/Users/duif/DK APP DEV/BeatPulseLab/beatpulse-annotator
+/Users/duif/DK APP DEV/TuneTag/tunetag-annotator
 
 1. git add .
 2. git commit -m "Refactor: extract useMicMeter, useAudioRecorder, useDictation, RecordingsPanel; housekeeping"
@@ -583,7 +583,7 @@ Commit and push the full refactor for the project at
 
 ```bash
 # Navigate to project
-cd "/Users/duif/DK APP DEV/BeatPulseLab/beatpulse-annotator"
+cd "/Users/duif/DK APP DEV/TuneTag/tunetag-annotator"
 
 # Run locally (always use localhost, not 127.0.0.1)
 npm run dev

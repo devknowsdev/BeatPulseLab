@@ -1,4 +1,4 @@
-# Running BeatPulse Locally
+# Running TuneTag Locally
 
 ## First time only
 
@@ -12,7 +12,7 @@ This installs all dependencies. Takes about 1 minute. You only do this once.
 
 ### Option A — Terminal (recommended)
 
-    cd /Users/duif/DK\ APP\ DEV/BeatPulseLab/beatpulse-annotator
+    cd /Users/duif/DK\ APP\ DEV/TuneTag/tunetag-annotator
     npm run dev
 
 Then open http://localhost:5173 in Chrome or Edge.

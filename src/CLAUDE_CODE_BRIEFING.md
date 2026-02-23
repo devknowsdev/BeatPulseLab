@@ -1,13 +1,13 @@
-# BeatPulse Annotator — Claude Code Session Briefing
+# TuneTag Annotator — Claude Code Session Briefing
 *Paste this as your very first message. Then paste prompts from CLAUDE_CODE_SESSION.md one at a time.*
 
 ---
 
-You are working on the BeatPulse Annotator project. Before we begin, read this briefing in full.
+You are working on the TuneTag Annotator project. Before we begin, read this briefing in full.
 
 ## Project location
 ```
-/Users/duif/DK APP DEV/BeatPulseLab/beatpulse-annotator
+/Users/duif/DK APP DEV/TuneTag/tunetag-annotator
 ```
 
 ## Your working doc
@@ -43,7 +43,7 @@ Phases are prioritised in the doc. If you sense we're running low on context, fl
 
 Run the following and report back:
 ```bash
-cd "/Users/duif/DK APP DEV/BeatPulseLab/beatpulse-annotator"
+cd "/Users/duif/DK APP DEV/TuneTag/tunetag-annotator"
 npx tsc --noEmit
 git log --oneline -5
 wc -l src/components/PhaseListening.tsx

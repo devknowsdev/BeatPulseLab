@@ -1,11 +1,11 @@
-# BeatPulse Annotator
+# TuneTag Annotator
 
-A focused React + TypeScript music annotation tool for BeatPulse Labs structured data work.
+A focused React + TypeScript music annotation tool for TuneTag structured data work.
 
 ## Setup
 
 ```bash
-cd beatpulse-annotator
+cd tunetag-annotator
 npm install
 npm run dev
 ```
@@ -18,13 +18,13 @@ The file `public/template.xlsx` must be present (it is included in this project)
 
 ## Validate Excel export
 
-Run this before submitting to BeatPulse:
+Run this before submitting to TuneTag:
 
 ```bash
 npx tsx scripts/validateExport.ts
 ```
 
-Must exit with code 0. It writes a test export to `/tmp/beatpulse_test_export.xlsx` — open that in Excel or LibreOffice to visually verify:
+Must exit with code 0. It writes a test export to `/tmp/tunetag_test_export.xlsx` — open that in Excel or LibreOffice to visually verify:
 - Timestamps show as `0:15` not `0.010416...`
 - Column B guidance text in Part 2 is untouched
 - Example sheet is exactly as received
@@ -32,7 +32,7 @@ Must exit with code 0. It writes a test export to `/tmp/beatpulse_test_export.xl
 ## Key edge cases addressed in this build
 
 1. **`wasTimerRunning`** — captures the timer state *before* the pause fires. Not hardcoded `true`.
-2. **`setAnnotator()`** — updates both the `beatpulse_annotator` localStorage key AND all track annotations, so `B2` always has the current name.
+2. **`setAnnotator()`** — updates both the `tunetag_annotator` localStorage key AND all track annotations, so `B2` always has the current name.
 3. **`elapsedSeconds`** — written back to `TrackAnnotation` on every timer tick via the `onTick` callback.
 4. **Skipped tracks** — clears all 10 timeline rows first, then writes `SKIPPED` to C6 and reason to C19 only. Nothing else.
 
@@ -61,4 +61,4 @@ Speech recognition requires Chrome or another browser with Web Speech API suppor
 - `src/lib/schema.ts` — single source of truth for all content (tracks, categories, style rules, tag suggestions). Future template parser replaces this file only.
 - `src/lib/excelExport.ts` — `exceljs` only. Timestamps are fractional day serials `(m*60+s)/86400`, never JS Date objects.
 - API key is runtime-only — entered in the UI, stored in `sessionStorage`, never in `.env` or code.
-- Autosave debounces at 500ms to `localStorage` key `beatpulse_v1`.
+- Autosave debounces at 500ms to `localStorage` key `tunetag_v1`.
